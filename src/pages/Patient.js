@@ -23,8 +23,7 @@ function Patient() {
    return patient ? (
       <>
          <h3>
-            {patient.firstName}
-            {patient.lastName}
+            {patient.firstName} {patient.lastName}
          </h3>
          <p>{patient.episode}</p>
          <p>{patient.age}</p>

@@ -33,7 +33,7 @@ function AdmitPatient() {
       setRegularMedication(event.target.value);
    }
    function handleAlergiesChange(event) {
-      setAlergies(event.target.value);
+      setAlergies(event.target.checked);
    }
 
    function handleEpisodeChange(event) {
@@ -107,7 +107,7 @@ function AdmitPatient() {
          <label htmlFor="alergies">Alergies</label>
          <input
             id="alergies"
-            type="select"
+            type="checkbox"
             value={alergies}
             onChange={handleAlergiesChange}
          />

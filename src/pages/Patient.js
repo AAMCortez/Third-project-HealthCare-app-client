@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { Button } from "reactstrap";
 import { dischargePatient, getPatient } from "../api";
+
 
 function Patient() {
    const [patient, setPatient] = useState(null);
@@ -19,14 +21,14 @@ function Patient() {
       await dischargePatient(patientId);
       navigate("/");
    }
-
+   console.log(patient);
    return patient ? (
       <>
          <h3>
             {patient.firstName} {patient.lastName}
          </h3>
          <p>{patient.episode}</p>
-         <p>{patient.age}</p>
+         <p>Age: {patient.age} years</p>
          <p>{patient.personalMedicalHistory}</p>
          <p>{patient.regularMedication}</p>
          {patient.alergies ? <p>yes</p> : <p>no</p>}
@@ -38,7 +40,28 @@ function Patient() {
                alt="patient"
             />
          )}
-         <button onClick={handleDischargePatient}>Discharge patient</button>
+         <div>
+            {patient && patient.wound ? (
+               <>
+                  <h4>
+                      {patient.firstName} {patient.lastName} Wounds:
+                  </h4>
+                  {patient.wound.map((wound) => {
+                     return (
+                        <div key={wound._id}>
+                           <p>{wound.pictureUrl}</p>
+                           <p>{wound.description}</p>
+                           <p>{wound.treatment}</p>
+                        </div>
+                     );
+                  })}
+               </>
+            ) : (
+               <p>no wound</p>
+            )}
+            <Link to={`/wound/${patientId}`}>Add a wound</Link>
+         </div>
+         <Button onClick={handleDischargePatient}>Discharge patient</Button>
       </>
    ) : (
       <Link to="../patient/admit">Admit Patient</Link>

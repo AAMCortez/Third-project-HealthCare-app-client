@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import IsPrivate from "./components/isPrivate";
 import Navbar from "./components/Navbar";
 import AddWound from "./pages/AddWound";
 import AdmitPatient from "./pages/AdmitPatient";
@@ -16,7 +17,14 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/patient/admit" element={<AdmitPatient />} />
+            <Route
+               path="/patient/admit"
+               element={
+                  <IsPrivate>
+                     <AdmitPatient />
+                  </IsPrivate>
+               }
+            />
             <Route path="/wound/:patientId" element={<AddWound />} />
             <Route path="/patient/:patientId" element={<Patient />} />
          </Routes>

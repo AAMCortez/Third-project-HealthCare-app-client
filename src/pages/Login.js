@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login } from "../api";
+import { UserContext } from "../context/user.context";
 
 function Login() {
    const [fullName, setFullName] = useState("");
    const [password, setPassword] = useState("");
+   const { authenticateUser } = useContext(UserContext);
    const navigate = useNavigate();
 
    function handleFullNameChange(event) {
@@ -21,6 +23,7 @@ function Login() {
          const response = await login({ fullName, password });
          localStorage.setItem("authToken", response.data);
          //Setting the logged user in the context
+         authenticateUser({ fullName });
          toast.success("User logged in");
          setFullName("");
          setPassword("");

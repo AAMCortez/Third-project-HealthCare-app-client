@@ -21,7 +21,6 @@ function Patient() {
       await dischargePatient(patientId);
       navigate("/");
    }
-   console.log(patient);
    return patient ? (
       <>
          <h3>

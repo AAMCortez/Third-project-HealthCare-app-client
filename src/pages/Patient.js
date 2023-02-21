@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "reactstrap";
 import { dischargePatient, getPatient } from "../api";
-
+import { UserContext } from "../context/user.context";
 
 function Patient() {
    const [patient, setPatient] = useState(null);
    const { patientId } = useParams();
    const navigate = useNavigate();
+   const { loggedUser, getUserType } = useContext(UserContext);
 
    useEffect(() => {
       async function handlePatientDetail() {
@@ -21,16 +22,18 @@ function Patient() {
       await dischargePatient(patientId);
       navigate("/");
    }
+   const type = getUserType(loggedUser);  // PROTECT OTHER ROUTES
+
    return patient ? (
       <>
          <h3>
-            {patient.firstName} {patient.lastName}
+            Patient {patient.firstName} {patient.lastName}
          </h3>
-         <p>{patient.episode}</p>
-         <p>Age: {patient.age} years</p>
-         <p>{patient.personalMedicalHistory}</p>
-         <p>{patient.regularMedication}</p>
-         {patient.alergies ? <p>yes</p> : <p>no</p>}
+         <p>{patient.age} years old</p>
+         <p>Medical background of {patient.personalMedicalHistory}</p>
+         <p>Regular medication {patient.regularMedication}</p>
+         <p>Patient admited with {patient.episode}</p>
+         {!patient.alergies ? <p>Has alergies</p> : <p>No alergies known</p>}
          {patient.imageUrl && (
             <img
                src={patient.imageUrl}
@@ -39,11 +42,27 @@ function Patient() {
                alt="patient"
             />
          )}
+         {patient && patient.healthCarePlan ? (
+            <div>this is the patient Health Care Plan</div>
+         ) : type.isNurse ? (
+            <Button onClick={() => navigate(`/interventions/${patientId}`)}>
+               Add interventions to the Plan
+            </Button>
+         ) : (
+            patient.healthCarePlan
+         )}
+         {patient && !patient.medication ? (
+            <div>this is the patient medication {patient.medication}</div>
+         ) : (
+            <Button onClick={() => navigate(`/meds/${patientId}`)}>
+               Add medication
+            </Button>
+         )}
          <div>
             {patient && patient.wound ? (
                <>
                   <h4>
-                      {patient.firstName} {patient.lastName} Wounds:
+                     {patient.firstName} {patient.lastName} Wounds:
                   </h4>
                   {patient.wound.map((wound) => {
                      return (
@@ -56,14 +75,18 @@ function Patient() {
                   })}
                </>
             ) : (
-               <p>no wound</p>
+               <p>Patient has skin integrity intact</p>
             )}
-            <Link to={`/wound/${patientId}`}>Add a wound</Link>
+            <Link to={`/wound/${patientId}`}>
+               <Button>Add a wound</Button>
+            </Link>
          </div>
          <Button onClick={handleDischargePatient}>Discharge patient</Button>
       </>
    ) : (
-      <Link to="../patient/admit">Admit Patient</Link>
+      <Button>
+         <Link to="../patient/admit">Admit Patient</Link>
+      </Button>
    );
 }
 

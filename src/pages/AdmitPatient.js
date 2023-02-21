@@ -74,65 +74,6 @@ function AdmitPatient() {
 
    return (
       <>
-         {/* <form onSubmit={handleSubmitForm}>
-            <label htmlFor="firstName">First Name</label>
-            <input
-               id="firstName"
-               type="text"
-               value={firstName}
-               onChange={handleFirstNameChange}
-            />
-            <label htmlFor="lastName">Last Name</label>
-            <input
-               id="lastName"
-               type="text"
-               value={lastName}
-               onChange={handleLastNameChange}
-            />
-            <label htmlFor="birthdate">Birthdate</label>
-            <input
-               id="birthdate"
-               type="date"
-               value={birthdate}
-               onChange={handleBirthdateChange}
-            />
-            <label htmlFor="bed">Bed</label>
-            <input
-               id="bed"
-               type="number"
-               value={bed}
-               onChange={handleBedChange}
-            />
-            <label htmlFor="personalMedicalHistory">Medical History</label>
-            <input
-               id="personalMedicalHistory"
-               type="textbox"
-               value={personalMedicalHistory}
-               onChange={handlePersonalMedicalHistoryChange}
-            />
-            <label htmlFor="regularMedication">Regular Medication</label>
-            <input
-               id="regularMedication"
-               type="text"
-               value={regularMedication}
-               onChange={handleRegularMedicationChange}
-            />
-            <label htmlFor="alergies">Alergies</label>
-            <input
-               id="alergies"
-               type="checkbox"
-               value={alergies}
-               onChange={handleAlergiesChange}
-            />
-            <label htmlFor="episode">Current Episode</label>
-            <input
-               id="episode"
-               type="text"
-               value={episode}
-               onChange={handleEpisodeChange}
-            />
-            <button type="submit">Admit Patient</button>
-         </form> */}
          <Form onSubmit={handleSubmitForm}>
             <Row>
                <Col md={3}>

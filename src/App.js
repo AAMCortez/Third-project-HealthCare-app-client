@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import AddIntervention from "./components/AddIntervention";
+import AddMedication from "./components/AddMedication";
 import IsPrivate from "./components/isPrivate";
 import Navbar from "./components/Navbar";
 import AddWound from "./pages/AddWound";
@@ -27,6 +29,14 @@ function App() {
             />
             <Route path="/wound/:patientId" element={<AddWound />} />
             <Route path="/patient/:patientId" element={<Patient />} />
+            <Route
+               path="/meds/:patientId"
+               element={<AddMedication />}
+            />
+            <Route
+               path="/interventions/:patientId"
+               element={<AddIntervention />}
+            />
          </Routes>
       </div>
    );

@@ -25,7 +25,7 @@ function Signup() {
    async function handleSubmitFrom(event) {
       event.preventDefault();
       try {
-         await signup({ firstName, lastName,fullName, password });
+         await signup({ firstName, lastName, fullName, password });
          toast.success("User created");
          setFirstName("");
          setLastName("");
@@ -61,6 +61,7 @@ function Signup() {
                value={fullName}
                onChange={handleFullNameChange}
             >
+               <option value="">Select an option</option>
                <option value="Nurse">Nurse</option>
                <option value="Dr">Doctor</option>
             </select>

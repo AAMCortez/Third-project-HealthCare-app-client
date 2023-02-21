@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { getAllPatients } from "../api";
 
+
+// Later use popover reactstrap to show details of each bed
+
+
 function Home() {
    getAllPatients();
    return (

@@ -29,6 +29,18 @@ function UserProviderWrapper({ children }) {
       authenticateUser();
    }, []);
 
+   function getUserType(loggedUser) {
+      const fullName = loggedUser && loggedUser.fullName;
+      let dr = false;
+      let nurse = false;
+       if (fullName && fullName.startsWith("Dr")) {
+         dr = true;
+      } else if (fullName && fullName.startsWith("Nurse")) {
+         nurse = true;
+      }
+      return  { isDr: dr, isNurse: nurse };
+   }
+
    return (
       <UserContext.Provider
          value={{
@@ -36,6 +48,7 @@ function UserProviderWrapper({ children }) {
             setLoggedUser,
             authenticateUser,
             logout,
+            getUserType,
          }}
       >
          {children}

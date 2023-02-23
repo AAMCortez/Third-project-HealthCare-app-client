@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Button, Col, FormGroup, Input, Label, Row, Form } from "reactstrap";
-import { addWound } from "../api";
+import { addWound, uploadImage } from "../api";
 
 function AddWound() {
    const [pictureUrl, setPictureUrl] = useState("");
@@ -10,19 +11,29 @@ function AddWound() {
    const { patientId } = useParams();
    const navigate = useNavigate();
 
-   function handlePictureUrlChange(event) {
-      setPictureUrl(event.target.value);
-   }
    function handleDescriptionChange(event) {
       setDescription(event.target.value);
    }
    function handleTreatment(event) {
       setTreatment(event.target.value);
    }
+   function handleImageSelect(event) {
+      setPictureUrl(event.target.files[0]);
+   }
    async function handleSubmitForm(event) {
       event.preventDefault();
-      await addWound({ pictureUrl, description, treatment, patientId });
-      navigate(`/patient/${patientId}`)
+      const uploadData = new FormData();
+      uploadData.append("filename", pictureUrl);
+      const response = await uploadImage(uploadData);
+      console.log("response from BE with image Url", response.data);
+      await addWound({
+         pictureUrl: response.data.fileUrl,
+         description,
+         treatment,
+         patientId,
+      });
+      toast.success("Wound added");
+      navigate(`/patient/${patientId}`);
    }
    return (
       <>
@@ -30,12 +41,11 @@ function AddWound() {
             <Row>
                <Col md={3}>
                   <FormGroup>
-                     <Label htmlFor="pictureUrl">Image</Label>
+                     <Label htmlFor="image"></Label>
                      <Input
-                        id="pictureUrl"
-                        type="text"
-                        value={pictureUrl}
-                        onChange={handlePictureUrlChange}
+                        id="image"
+                        type="file"
+                        onChange={handleImageSelect}
                      />
                   </FormGroup>
                </Col>

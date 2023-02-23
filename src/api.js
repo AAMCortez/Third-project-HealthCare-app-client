@@ -8,7 +8,6 @@ export const getPatient = (bed) => {
    return axios.get(`${BASE_URL}/patient/${bed}`);
 };
 export const updatePatient = (bed, data) => {
-   console.log(data)
    return axios.put(`${BASE_URL}/update/${bed}`, data); // pass data to the route
  };
 export const dischargePatient = (bed) => {
@@ -25,6 +24,9 @@ export const signup = (user) => {
 };
 export const addWound = (patient) => {
    return axios.post(`${BASE_URL}/wound`, patient);
+};
+export const uploadImage = (uploadData) => {
+   return axios.post(`${BASE_URL}/upload`, uploadData);
 };
 export const verify = (token) => {
    return axios.get(`${BASE_URL}/verify`, {

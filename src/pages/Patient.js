@@ -73,7 +73,7 @@ function Patient() {
          )}
 
          <div>
-            {patient.wound ? (
+            {patient.wound.length > 0 ? (
                <>
                   <h4>
                      {patient.firstName} {patient.lastName} Wounds:
@@ -81,7 +81,7 @@ function Patient() {
                   {patient.wound.map((wound) => {
                      return (
                         <div key={wound._id}>
-                           <p>{wound.pictureUrl}</p>
+                        {wound.pictureUrl && <img src={wound.pictureUrl} width="300" height="300" alt="wound" />}
                            <p>{wound.description}</p>
                            <p>{wound.treatment}</p>
                         </div>

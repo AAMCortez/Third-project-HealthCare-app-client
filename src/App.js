@@ -28,14 +28,31 @@ function App() {
                      </IsPrivate>
                   }
                />
-               <Route path="/wound/:patientId" element={<AddWound />} />
+               <Route
+                  path="/wound/:patientId"
+                  element={
+                     <IsPrivate>
+                        <AddWound />
+                     </IsPrivate>
+                  }
+               />
                <Route path="/patient/:patientId" element={<Patient />} />
-               <Route path="/meds/:patientId" element={<AddMedication />} />
+               <Route
+                  path="/meds/:patientId"
+                  element={
+                     <IsPrivate>
+                        <AddMedication />
+                     </IsPrivate>
+                  }
+               />
                <Route
                   path="/interventions/:patientId"
-                  element={<AddIntervention />}
+                  element={
+                     <IsPrivate>
+                        <AddIntervention />
+                     </IsPrivate>
+                  }
                />
-               <Route path="/meds/:patientId" element={<AddMedication />} />
             </Routes>
          </main>
       </div>

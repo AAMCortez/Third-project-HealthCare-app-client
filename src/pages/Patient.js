@@ -22,7 +22,7 @@ function Patient() {
       await dischargePatient(patientId);
       navigate("/");
    }
-   const type = getUserType(loggedUser);  // PROTECT OTHER ROUTES
+   const type = getUserType(loggedUser); // PROTECT OTHER ROUTES
 
    return patient ? (
       <>
@@ -33,7 +33,7 @@ function Patient() {
          <p>Medical background of {patient.personalMedicalHistory}</p>
          <p>Regular medication {patient.regularMedication}</p>
          <p>Patient admited with {patient.episode}</p>
-         {!patient.alergies ? <p>Has alergies</p> : <p>No alergies known</p>}
+         {!patient.alergies ? <p>Patient has allergies to: {patient.alergiesSpecification}</p> : <p>No allergies known</p>}
          {patient.imageUrl && (
             <img
                src={patient.imageUrl}
@@ -42,24 +42,38 @@ function Patient() {
                alt="patient"
             />
          )}
-         {patient && patient.healthCarePlan ? (
-            <div>this is the patient Health Care Plan</div>
-         ) : type.isNurse ? (
+         {patient && patient.healthcarePlan ? (
+            <div>
+               <h4>Patient Health Care Plan</h4>
+               {patient.healthcarePlan.map((intervention) => {
+                  return <p key={intervention}>{intervention}</p>;
+               })}
+            </div>
+         ) : null}
+
+         {patient && patient.medication ? (
+            <div>
+               <h4>Patient Medication</h4>
+               {patient.medication.map((meds) => {
+                  return <p key={meds}>{meds}</p>;
+               })}
+            </div>
+         ) : null}
+
+         {type.isNurse && (
             <Button onClick={() => navigate(`/interventions/${patientId}`)}>
                Add interventions to the Plan
             </Button>
-         ) : (
-            patient.healthCarePlan
          )}
-         {patient && !patient.medication ? (
-            <div>this is the patient medication {patient.medication}</div>
-         ) : (
+
+         {type.isDr && (
             <Button onClick={() => navigate(`/meds/${patientId}`)}>
                Add medication
             </Button>
          )}
+
          <div>
-            {patient && patient.wound ? (
+            {patient.wound ? (
                <>
                   <h4>
                      {patient.firstName} {patient.lastName} Wounds:
@@ -77,16 +91,20 @@ function Patient() {
             ) : (
                <p>Patient has skin integrity intact</p>
             )}
-            <Link to={`/wound/${patientId}`}>
-               <Button>Add a wound</Button>
-            </Link>
+            {loggedUser ? (
+               <Link to={`/wound/${patientId}`}>
+                  <Button>Add a wound</Button>
+               </Link>
+            ) : null}
          </div>
-         <Button onClick={handleDischargePatient}>Discharge patient</Button>
+         {loggedUser ? (
+            <Button onClick={handleDischargePatient}>Discharge patient</Button>
+         ) : null}
       </>
    ) : (
-      <Button>
-         <Link to="../patient/admit">Admit Patient</Link>
-      </Button>
+      <Link to="../patient/admit">
+         <Button>Admit Patient </Button>
+      </Link>
    );
 }
 

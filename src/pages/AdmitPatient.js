@@ -11,6 +11,7 @@ function AdmitPatient() {
    const [personalMedicalHistory, setPersonalMedicalHistory] = useState("");
    const [regularMedication, setRegularMedication] = useState("");
    const [alergies, setAlergies] = useState(false);
+   const [alergiesSpecification, setAlergiesSpecification] = useState("");
    const [episode, setEpisode] = useState("");
 
    const navigate = useNavigate();
@@ -42,6 +43,9 @@ function AdmitPatient() {
    function handleAlergiesChange(event) {
       setAlergies(event.target.checked);
    }
+   function handleAlergiesSpecificationChange(event) {
+      setAlergiesSpecification(event.target.value);
+   }
 
    function handleEpisodeChange(event) {
       setEpisode(event.target.value);
@@ -57,6 +61,7 @@ function AdmitPatient() {
          personalMedicalHistory,
          regularMedication,
          alergies,
+         alergiesSpecification,
          episode,
       });
       await admitPatient({
@@ -67,6 +72,7 @@ function AdmitPatient() {
          personalMedicalHistory,
          regularMedication,
          alergies,
+         alergiesSpecification,
          episode,
       });
       navigate("/");
@@ -155,9 +161,22 @@ function AdmitPatient() {
                         value={alergies}
                         onChange={handleAlergiesChange}
                      />
-                     <Label htmlFor="alergies">Alergies</Label>
+                     <Label htmlFor="alergies">Allergies</Label>
                   </FormGroup>
                </Col>
+               {alergies && (
+                  <Col md={8}>
+                     <FormGroup>
+                        <Label htmlFor="alergiesSpecification">Allergy Specification:</Label>
+                        <Input
+                           id="alergiesSpecification"
+                           type="text"
+                           value={alergiesSpecification}
+                           onChange={handleAlergiesSpecificationChange}
+                        />
+                     </FormGroup>
+                  </Col>
+               )}
                <Col md={6}>
                   <FormGroup>
                      <Label htmlFor="episode">Current Episode</Label>

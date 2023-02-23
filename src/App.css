@@ -1,0 +1,122 @@
+.App {
+   display: flex;
+   height: 100vh;
+   overflow: hidden;
+   text-align: center;
+}
+
+.App-logo {
+   height: 40vmin;
+   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+   .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+   }
+}
+
+.App-header {
+   background-color: #282c34;
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   font-size: calc(10px + 2vmin);
+   color: white;
+}
+
+.App-link {
+   color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(360deg);
+   }
+}
+.navbar {
+   background: linear-gradient(
+      to bottom,
+      rgb(238, 36, 36) 50%,
+      transparent 50%
+   );
+   height: 100%;
+   width: 150px;
+   overflow-x: hidden;
+   padding-top: 20px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.navbar a {
+   display: block;
+   color: white;
+   padding: 12px 16px;
+   text-decoration: none;
+   transition: background-color 0.3s;
+   margin-bottom: 10px;
+}
+
+.navbar a:hover {
+   background-color: #555;
+}
+
+.navbar .active {
+   background-color: #e3f431;
+}
+
+.navbar-logged-user {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 20px;
+}
+
+.navbar-logged-user p {
+   color: white;
+   margin-bottom: 10px;
+}
+
+.navbar-logged-user button {
+   background-color: white;
+   color: red;
+   border: none;
+   padding: 10px;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.navbar-logged-user button:hover {
+   background-color: #eee;
+}
+
+h1 {
+   font-size: 3rem; /* Adjust as needed */
+   font-weight: bold;
+   color: #333; /* Adjust as needed */
+   text-align: center; /* Adjust as needed */
+   margin-bottom: 1rem; /* Adjust as needed */
+}
+
+h2 {
+   font-size: 2.5rem; /* Adjust as needed */
+   font-weight: bold;
+   color: #333; /* Adjust as needed */
+   text-align: center; /* Adjust as needed */
+   margin-bottom: 0.75rem; /* Adjust as needed */
+}
+
+h3 {
+   font-size: 2rem; /* Adjust as needed */
+   font-weight: bold;
+   color: #333; /* Adjust as needed */
+   text-align: center; /* Adjust as needed */
+   margin-bottom: 0.5rem; /* Adjust as needed */
+}

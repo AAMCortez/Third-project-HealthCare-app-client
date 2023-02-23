@@ -7,9 +7,10 @@ export const getAllPatients = () => {
 export const getPatient = (bed) => {
    return axios.get(`${BASE_URL}/patient/${bed}`);
 };
-export const updatePatient = (bed) => {
-   return axios.put(`${BASE_URL}/patient/${bed}`);
-};
+export const updatePatient = (bed, data) => {
+   console.log(data)
+   return axios.put(`${BASE_URL}/update/${bed}`, data); // pass data to the route
+ };
 export const dischargePatient = (bed) => {
    return axios.delete(`${BASE_URL}/patient/${bed}`);
 };

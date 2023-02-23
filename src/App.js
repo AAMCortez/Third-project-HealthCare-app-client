@@ -15,29 +15,29 @@ function App() {
    return (
       <div className="App">
          <Navbar />
-         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route
-               path="/patient/admit"
-               element={
-                  <IsPrivate>
-                     <AdmitPatient />
-                  </IsPrivate>
-               }
-            />
-            <Route path="/wound/:patientId" element={<AddWound />} />
-            <Route path="/patient/:patientId" element={<Patient />} />
-            <Route
-               path="/meds/:patientId"
-               element={<AddMedication />}
-            />
-            <Route
-               path="/interventions/:patientId"
-               element={<AddIntervention />}
-            />
-         </Routes>
+         <main>
+            <Routes>
+               <Route path="/" element={<Home />} />
+               <Route path="/login" element={<Login />} />
+               <Route path="/signup" element={<Signup />} />
+               <Route
+                  path="/patient/admit"
+                  element={
+                     <IsPrivate>
+                        <AdmitPatient />
+                     </IsPrivate>
+                  }
+               />
+               <Route path="/wound/:patientId" element={<AddWound />} />
+               <Route path="/patient/:patientId" element={<Patient />} />
+               <Route path="/meds/:patientId" element={<AddMedication />} />
+               <Route
+                  path="/interventions/:patientId"
+                  element={<AddIntervention />}
+               />
+               <Route path="/meds/:patientId" element={<AddMedication />} />
+            </Routes>
+         </main>
       </div>
    );
 }

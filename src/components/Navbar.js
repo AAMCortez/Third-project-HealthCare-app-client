@@ -5,23 +5,23 @@ import { useContext } from "react";
 function Navbar() {
    const { loggedUser, logout } = useContext(UserContext);
    return (
-      <Nav vertical>
+      <Nav className="navbar">
          <div>
             <NavItem>
-               <NavLink to="/">Home</NavLink>
+               <NavLink className="navbar-button" to="/">Home</NavLink>
             </NavItem>
             {loggedUser ? (
-               <div className="navbar">
+               <div className="navbar-logged-user">
                   <p>Welcome {loggedUser.fullName}</p>
                   <button onClick={logout}>Logout</button>
                </div>
             ) : (
                <div>
                   <NavItem>
-                     <NavLink to="/login">Login</NavLink>
+                     <NavLink className="navbar-button" to="/login">Login</NavLink>
                   </NavItem>
                   <NavItem>
-                     <NavLink to="/signup">Signup</NavLink>
+                     <NavLink className="navbar-button" to="/signup">Signup</NavLink>
                   </NavItem>
                </div>
             )}

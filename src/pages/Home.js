@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllPatients } from "../api";
 
@@ -6,46 +7,35 @@ import { getAllPatients } from "../api";
 
 
 function Home() {
-   getAllPatients();
-   return (
-      <div>
-         <Link to={`/patient/1`}>
+   const [patients, setPatients] = useState(null);
+
+   useEffect(() => {
+      async function handlePatientDetails() {
+         const response = await getAllPatients()
+         setPatients(response.data);
+      }
+      handlePatientDetails();
+   }, []);
+
+   const beds = [1, 2, 3, 4, 5, 6];
+
+  return (
+    <div>
+      {beds.map((bedNumber) => {
+        const patient = patients?.find((p) => p.bed === bedNumber); // find patient with matching bed number
+        const imgSrc = patient ? "../images/bedfull.png" : "../images/bedempty.png"; // determine image source
+        return (
+          <Link key={bedNumber} to={`/patient/${bedNumber}`}>
             <img
-               style={{ width: "200px", height: "200px" }}
-               src="../images/bed.jpg"
-               alt="bed1"
+              style={{ width: "250px", height: "200px" }}
+              src={imgSrc}
+              alt={`bed${bedNumber}`}
             />
-         </Link>
-         <Link to={`/patient/2`}>
-            <img
-               style={{ width: "200px", height: "200px" }}
-               src="../images/bed.jpg"
-               alt="bed2"
-            />
-         </Link>
-         <Link to={`/patient/3`}>
-            <img
-               style={{ width: "200px", height: "200px" }}
-               src="../images/bed.jpg"
-               alt="bed3"
-            />
-         </Link>
-         <Link to={`/patient/4`}>
-            <img
-               style={{ width: "200px", height: "200px" }}
-               src="../images/bed.jpg"
-               alt="bed4"
-            />
-         </Link>
-         <Link to={`/patient/5`}>
-            <img
-               style={{ width: "200px", height: "200px" }}
-               src="../images/bed.jpg"
-               alt="bed5"
-            />
-         </Link>
-      </div>
-   );
+          </Link>
+        );
+      })}
+    </div>
+  );
 }
 
 export default Home;

@@ -30,7 +30,7 @@ function Home() {
 
    return (
       <Stack
-         spacing={3}
+         spacing={20}
          display="flex"
          flexDirection="row"
          flexWrap="wrap"

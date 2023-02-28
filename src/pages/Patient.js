@@ -164,14 +164,74 @@ function Patient() {
                         </Text>
                      </Stack>
                      <Stack>
-                        <Text color={"gray.700"}>
-                           <Text fontWeight={600}>Medical background of</Text>{" "}
-                           {patient.personalMedicalHistory}
-                        </Text>
-                        <Text color={"gray.700"}>
-                           <Text fontWeight={600}>Regular medication</Text>{" "}
-                           {patient.regularMedication}
-                        </Text>
+                        {patient && patient.healthcarePlan.length > 0 ? (
+                           <Text color={"gray.700"}>
+                              <Text fontWeight={600}>
+                                 Patient Health Care Plan
+                              </Text>
+                              {patient.healthcarePlan.map((intervention) => {
+                                 return (
+                                    <Text key={intervention}>
+                                       {intervention}
+                                    </Text>
+                                 );
+                              })}
+                           </Text>
+                        ) : null}
+
+                        {patient && patient.medication.length > 0 ? (
+                           <Text color={"gray.700"}>
+                              <Text fontWeight={600}>Patient Medication</Text>
+                              {patient.medication.map((meds) => {
+                                 return <Text key={meds}>{meds}</Text>;
+                              })}
+                           </Text>
+                        ) : null}
+                        {type.isNurse && (
+                           <Button
+                              onClick={() =>
+                                 navigate(`/interventions/${patientId}`)
+                              }
+                              flex={2}
+                              fontSize={"sm"}
+                              rounded={"full"}
+                              bg={"blue.400"}
+                              color={"white"}
+                              boxShadow={
+                                 "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                              }
+                              _hover={{
+                                 bg: "blue.500",
+                              }}
+                              _focus={{
+                                 bg: "blue.500",
+                              }}
+                           >
+                              Add interventions to the Plan
+                           </Button>
+                        )}
+                        {type.isDr && (
+                           <Button
+                              onClick={() => navigate(`/meds/${patientId}`)}
+                              flex={2}
+                              fontSize={"sm"}
+                              size={"md"}
+                              rounded={"full"}
+                              bg={"blue.400"}
+                              color={"white"}
+                              boxShadow={
+                                 "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                              }
+                              _hover={{
+                                 bg: "blue.500",
+                              }}
+                              _focus={{
+                                 bg: "blue.500",
+                              }}
+                           >
+                              Add medication
+                           </Button>
+                        )}
                      </Stack>
                   </Stack>
                   <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
@@ -188,50 +248,6 @@ function Patient() {
                         )}
                      </Stack>
                   </Stack>
-
-                  {type.isNurse && (
-                     <Button
-                        onClick={() => navigate(`/interventions/${patientId}`)}
-                        flex={2}
-                        fontSize={"sm"}
-                        rounded={"full"}
-                        bg={"blue.400"}
-                        color={"white"}
-                        boxShadow={
-                           "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                        }
-                        _hover={{
-                           bg: "blue.500",
-                        }}
-                        _focus={{
-                           bg: "blue.500",
-                        }}
-                     >
-                        Add interventions to the Plan
-                     </Button>
-                  )}
-                  {type.isDr && (
-                     <Button
-                        onClick={() => navigate(`/meds/${patientId}`)}
-                        flex={2}
-                        fontSize={"sm"}
-                        size={"lg"}
-                        rounded={"full"}
-                        bg={"blue.400"}
-                        color={"white"}
-                        boxShadow={
-                           "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                        }
-                        _hover={{
-                           bg: "blue.500",
-                        }}
-                        _focus={{
-                           bg: "blue.500",
-                        }}
-                     >
-                        Add medication
-                     </Button>
-                  )}
                </Box>
             </Center>
          </>

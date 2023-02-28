@@ -95,6 +95,9 @@ function Login() {
                               type="text"
                               value={fullName}
                               onChange={handleFullNameChange}
+                              borderColor='black'
+                              borderWidth={'1px'}
+                              rounded='md'
                            />
                         </FormControl>
                         <FormControl id="password">
@@ -104,6 +107,9 @@ function Login() {
                               type="password"
                               value={password}
                               onChange={handlePasswordChange}
+                              borderColor='black'
+                              borderWidth={'1px'}
+                              rounded='md'
                            />
                         </FormControl>
                         <Stack spacing={10}>

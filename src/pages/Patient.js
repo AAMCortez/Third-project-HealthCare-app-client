@@ -6,13 +6,13 @@ import {
    Heading,
    Text,
    Stack,
-   useColorModeValue,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link as ReachLink } from "react-router-dom";
 import { dischargePatient, getPatient } from "../api";
 import { UserContext } from "../context/user.context";
+import AdmitModal from "../components/Modal";
 
 function Patient() {
    const [patient, setPatient] = useState(null);
@@ -193,10 +193,10 @@ function Patient() {
                                  navigate(`/interventions/${patientId}`)
                               }
                               flex={2}
-                              fontSize={"sm"}
                               rounded={"full"}
                               bg={"blue.400"}
                               color={"white"}
+                              height={'48px'}
                               boxShadow={
                                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
                               }
@@ -216,7 +216,8 @@ function Patient() {
                               flex={2}
                               fontSize={"sm"}
                               size={"md"}
-                              rounded={"full"}
+                              rounded={"xl"}
+                              height={'48px'}
                               bg={"blue.400"}
                               color={"white"}
                               boxShadow={
@@ -233,10 +234,68 @@ function Patient() {
                            </Button>
                         )}
                      </Stack>
+                     <Stack
+                        mt={4}
+                        direction={"row"}
+                        spacing={3}
+                        align={"center"}
+                     >
+                        <>
+                           {patient.wound.length > 0 ? (
+                              <Box>
+                                 <Text>
+                                    {patient.firstName} {patient.lastName}{" "}
+                                    Wounds:
+                                 </Text>
+                                 {patient.wound.map((wound) => {
+                                    return (
+                                       <Box key={wound._id}>
+                                          {wound.pictureUrl && (
+                                             <img
+                                                src={wound.pictureUrl}
+                                                width="300"
+                                                height="300"
+                                                alt="wound"
+                                             />
+                                          )}
+                                          <Text>{wound.description}</Text>
+                                          <Text>{wound.treatment}</Text>
+                                       </Box>
+                                    );
+                                 })}
+                              </Box>
+                           ) : (
+                              <Text>Patient has skin integrity intact</Text>
+                           )}
+                           {loggedUser ? (
+                              <Link as={ReachLink} to={`/wound/${patientId}`}>
+                                 <Button
+                                    flex={2}
+                                    fontSize={"sm"}
+                                    size={"md"}
+                                    rounded={"xl"}
+                                    bg={"blue.400"}
+                                    color={"white"}
+                                    boxShadow={
+                                       "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                                    }
+                                    _hover={{
+                                       bg: "blue.500",
+                                    }}
+                                    _focus={{
+                                       bg: "blue.500",
+                                    }}
+                                 >
+                                    Add a wound
+                                 </Button>
+                              </Link>
+                           ) : null}
+                        </>
+                     </Stack>
                   </Stack>
                   <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
                      <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-                        {!patient.alergies ? (
+                        {!patient.alergiesSpecification ? (
                            <>
                               <Text fontWeight={600}>
                                  Patient has allergies to:
@@ -248,14 +307,35 @@ function Patient() {
                         )}
                      </Stack>
                   </Stack>
+
+                  {loggedUser ? (
+                     <Button
+                        onClick={handleDischargePatient}
+                        flex={2}
+                        fontSize={"sm"}
+                        size={"md"}
+                        rounded={"full"}
+                        bg={"red.500"}
+                        color={"white"}
+                        boxShadow={
+                           "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                        }
+                        _hover={{
+                           bg: "blue.500",
+                        }}
+                        _focus={{
+                           bg: "blue.500",
+                        }}
+                     >
+                        Discharge patient
+                     </Button>
+                  ) : null}
                </Box>
             </Center>
          </>
       </>
    ) : (
-      <Link as={ReachLink} to="../patient/admit">
-         <Button>Admit Patient </Button>
-      </Link>
+      <AdmitModal/>
    );
 }
 

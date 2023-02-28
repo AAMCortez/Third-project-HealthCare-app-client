@@ -11,7 +11,6 @@ import Login from "./pages/Login";
 import Patient from "./pages/Patient";
 import Signup from "./pages/Signup";
 
-import AdmitModal from "./components/Admitpacient";
 import { ChakraBaseProvider } from "@chakra-ui/react";
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
          <ChakraBaseProvider>
             <Navbar />
             <Routes>
-               <Route path="/modal" element={<AdmitModal />} />
                <Route path="/" element={<Home />} />
                <Route path="/login" element={<Login />} />
                <Route path="/signup" element={<Signup />} />

@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllPatients } from "../api";
+import axios from "axios";
 
 function Home() {
    const [patients, setPatients] = useState(null);
@@ -27,6 +28,29 @@ function Home() {
    }, []);
 
    const beds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+   useEffect(() => {
+      const options = {
+         method: "GET",
+         url: "https://drug-info-and-price-history.p.rapidapi.com/1/druginfo",
+         params: { drug: "captopril" },
+         headers: {
+            "X-RapidAPI-Key":
+               "8286a9461fmsh71d9c4ea5a424fap14b4c3jsnaa976d35a793",
+            "X-RapidAPI-Host": "drug-info-and-price-history.p.rapidapi.com",
+         },
+      };
+
+      axios
+         .request(options)
+         .then(function (response) {
+            console.log(response.data);
+         })
+         .catch(function (error) {
+            console.error(error);
+         });
+   }, []);
+
 
    return (
       <Stack

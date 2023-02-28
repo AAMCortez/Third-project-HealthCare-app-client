@@ -1,6 +1,6 @@
+import { Button } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button } from "reactstrap";
 import { dischargePatient, getPatient } from "../api";
 import { UserContext } from "../context/user.context";
 
@@ -20,6 +20,7 @@ function Patient() {
 
    async function handleDischargePatient() {
       await dischargePatient(patientId);
+      
       navigate("/");
    }
    const type = getUserType(loggedUser); // PROTECT OTHER ROUTES

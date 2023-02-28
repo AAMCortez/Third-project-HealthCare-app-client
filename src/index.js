@@ -4,18 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { UserProviderWrapper } from "./context/user.context";
+import { ChakraBaseProvider } from "@chakra-ui/react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-   <React.StrictMode>
-      <Router>
-         <UserProviderWrapper>
-            <App />
-         </UserProviderWrapper>
-      </Router>
-   </React.StrictMode>
+   <Router>
+      <UserProviderWrapper>
+         <ChakraBaseProvider><App /></ChakraBaseProvider>
+      </UserProviderWrapper>
+   </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -196,7 +196,7 @@ function Patient() {
                               rounded={"full"}
                               bg={"blue.400"}
                               color={"white"}
-                              height={'48px'}
+                              height={"48px"}
                               boxShadow={
                                  "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
                               }
@@ -217,7 +217,7 @@ function Patient() {
                               fontSize={"sm"}
                               size={"md"}
                               rounded={"xl"}
-                              height={'48px'}
+                              height={"48px"}
                               bg={"blue.400"}
                               color={"white"}
                               boxShadow={
@@ -335,7 +335,9 @@ function Patient() {
          </>
       </>
    ) : (
-      <AdmitModal/>
+      <Box display="block" position="fixed">
+         <AdmitModal />
+      </Box>
    );
 }
 

@@ -76,6 +76,7 @@ function Login() {
                align={"center"}
                justify={"center"}
                bg={useColorModeValue("gray.50", "gray.800")}
+               
             >
                <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
                   <Stack align={"center"}>
@@ -95,7 +96,8 @@ function Login() {
                               type="text"
                               value={fullName}
                               onChange={handleFullNameChange}
-                              borderColor='black'
+                              width="full"
+                              borderColor='grey'
                               borderWidth={'1px'}
                               rounded='md'
                            />
@@ -107,7 +109,8 @@ function Login() {
                               type="password"
                               value={password}
                               onChange={handlePasswordChange}
-                              borderColor='black'
+                              width="full"
+                              borderColor='grey'
                               borderWidth={'1px'}
                               rounded='md'
                            />
@@ -120,6 +123,7 @@ function Login() {
                               _hover={{
                                  bg: "blue.500",
                               }}
+                              rounded="md"
                            >
                               Login
                            </Button>

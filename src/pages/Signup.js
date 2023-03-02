@@ -126,6 +126,10 @@ function Signup() {
                                     type="text"
                                     value={firstName}
                                     onChange={handleFirstNameChange}
+                                    width="full"
+                                    borderColor="grey"
+                                    borderWidth={"1px"}
+                                    rounded="md"
                                  />
                               </FormControl>
                            </Box>
@@ -137,6 +141,10 @@ function Signup() {
                                     type="text"
                                     value={lastName}
                                     onChange={handleLastNameChange}
+                                    width="full"
+                                    borderColor="grey"
+                                    borderWidth={"1px"}
+                                    rounded="md"
                                  />
                               </FormControl>
                            </Box>
@@ -152,6 +160,10 @@ function Signup() {
                                  value={fullName}
                                  onChange={handleFullNameChange}
                                  placeholder="Select an option"
+                                 width="full"
+                                 borderColor="grey"
+                                 borderWidth={"1px"}
+                                 rounded="md"
                               >
                                  <option value="Nurse">Nurse</option>
                                  <option value="Dr">Doctor</option>
@@ -166,6 +178,10 @@ function Signup() {
                                  id="password"
                                  value={password}
                                  onChange={handlePasswordChange}
+                                 width="full"
+                                 borderColor="grey"
+                                 borderWidth={"1px"}
+                                 rounded="md"
                               />
                               <InputRightElement h={"full"}>
                                  <Button
@@ -195,6 +211,7 @@ function Signup() {
                                  bg: "blue.500",
                               }}
                               type="submit"
+                              rounded="md"
                            >
                               Sign up
                            </Button>

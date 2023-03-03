@@ -9,7 +9,7 @@ import {
    Box,
    FormControl,
    FormLabel,
-   Input,   
+   Input,
    Stack,
    Link,
    Button,
@@ -49,34 +49,12 @@ function Login() {
 
    return (
       <>
-         {/* <h2>Login</h2>
-         <form onSubmit={handleSubmitFrom}>
-            <label htmlFor="fullName">Full Name</label>
-            <input
-               id="fullName"
-               type="text"
-               value={fullName}
-               onChange={handleFullNameChange}
-            />
-            <label htmlFor="password">Password</label>
-            <input
-               id="password"
-               type="password"
-               value={password}
-               onChange={handlePasswordChange}
-            />
-            <button type="submit">Login</button>
-         </form>
-         <p>Don't have an account?</p>
-         <Link to="/signup">Sign up</Link> */}
-
          <form onSubmit={handleSubmitFrom}>
             <Flex
-               minH={"100vh"}
+               minH={"90vh"}
                align={"center"}
                justify={"center"}
                bg={useColorModeValue("gray.50", "gray.800")}
-               
             >
                <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
                   <Stack align={"center"}>
@@ -97,9 +75,9 @@ function Login() {
                               value={fullName}
                               onChange={handleFullNameChange}
                               width="full"
-                              borderColor='grey'
-                              borderWidth={'1px'}
-                              rounded='md'
+                              borderColor="grey"
+                              borderWidth={"1px"}
+                              rounded="md"
                            />
                         </FormControl>
                         <FormControl id="password">
@@ -110,9 +88,9 @@ function Login() {
                               value={password}
                               onChange={handlePasswordChange}
                               width="full"
-                              borderColor='grey'
-                              borderWidth={'1px'}
-                              rounded='md'
+                              borderColor="grey"
+                              borderWidth={"1px"}
+                              rounded="md"
                            />
                         </FormControl>
                         <Stack spacing={10}>

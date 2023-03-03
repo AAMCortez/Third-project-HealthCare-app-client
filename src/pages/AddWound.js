@@ -5,6 +5,7 @@ import {
    FormLabel,
    Input,
    Stack,
+   Textarea,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -44,11 +45,11 @@ function AddWound() {
    }
    return (
       <>
-         <Box as="form" onSubmit={handleSubmitForm}>
+         <Box as="form" w="400px" onSubmit={handleSubmitForm}>
             <Stack>
                <Box md={3}>
                   <FormControl>
-                     <FormLabel htmlFor="image"></FormLabel>
+                     <FormLabel htmlFor="image">Upload Wound Image</FormLabel>
                      <Input
                         id="image"
                         type="file"
@@ -59,7 +60,8 @@ function AddWound() {
                <Box md={3}>
                   <FormControl>
                      <FormLabel htmlFor="description">Description</FormLabel>
-                     <Input
+                     <Textarea 
+                        resize="none"
                         width="full"
                         borderColor="grey"
                         borderWidth={"1px"}
@@ -74,7 +76,8 @@ function AddWound() {
                <Box md={2}>
                   <FormControl>
                      <FormLabel htmlFor="treatment">Treatment</FormLabel>
-                     <Input
+                     <Textarea
+                        resize="none"
                         width="full"
                         borderColor="grey"
                         borderWidth={"1px"}

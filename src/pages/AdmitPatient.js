@@ -9,10 +9,11 @@ import {
    Textarea,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { admitPatient } from "../api";
 
 function AdmitPatient() {
+   const { patientId } = useParams();
    const [firstName, setFirstName] = useState("");
    const [lastName, setLastName] = useState("");
    const [birthdate, setBirthdate] = useState("");
@@ -40,11 +41,6 @@ function AdmitPatient() {
    function handlePersonalMedicalHistoryChange(event) {
       setPersonalMedicalHistory(event.target.value);
    }
-   // function addPersonalMedical(){
-   //    onkeydown()    WHEN DONE ADD KEYDOWN EVENT TO UPDATE AND PUSH AN ARRAY OF DISEASES
-
-   //    }
-   // }
 
    function handleRegularMedicationChange(event) {
       setRegularMedication(event.target.value);
@@ -135,6 +131,7 @@ function AdmitPatient() {
                   id="bed"
                   type="number"
                   value={bed}
+                  placeholder={patientId}
                   width="full"
                   borderColor="grey"
                   borderWidth={"1px"}

@@ -77,11 +77,11 @@ function Patient() {
                         {patient.regularMedication}
                      </Text>
                      <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-                        {!patient.alergiesSpecification ? (
+                        {patient.alergiesSpecification ? (
                            <>
                               <Text fontWeight={600}>
                                  Patient has allergies to:
-                              </Text>{" "}
+                              </Text>
                               <Text>{patient.alergiesSpecification}</Text>
                            </>
                         ) : (

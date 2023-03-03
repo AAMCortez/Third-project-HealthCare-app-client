@@ -59,47 +59,9 @@ function Signup() {
 
    return (
       <>
-         {/* <h2>Signup</h2>
-         <form onSubmit={handleSubmitFrom}>
-            <label htmlFor="firstName">First Name</label>
-            <input
-               id="firstName"
-               type="text"
-               value={firstName}
-               onChange={handleFirstNameChange}
-            />
-            <label htmlFor="lastName">Last Name</label>
-            <input
-               id="lastName"
-               type="text"
-               value={lastName}
-               onChange={handleLastNameChange}
-            />
-            <label htmlFor="fullName">Are you a nurse or a doctor?</label>
-            <select
-               name="fullName"
-               id="fullName"
-               value={fullName}
-               onChange={handleFullNameChange}
-            >
-               <option value="">Select an option</option>
-               <option value="Nurse">Nurse</option>
-               <option value="Dr">Doctor</option>
-            </select>
-            <label htmlFor="password">Password</label>
-            <input
-               id="password"
-               type="password"
-               value={password}
-               onChange={handlePasswordChange}
-            />
-            <button type="submit">Sign up</button>
-         </form>
-         <p>Already have an account?</p>
-         <Link to="/login">Login</Link> */}
          <form onSubmit={handleSubmitFrom}>
             <Flex
-               minH={"100vh"}
+               minH={"90vh"}
                align={"center"}
                justify={"center"}
                bg={useColorModeValue("gray.50", "gray.800")}
@@ -164,6 +126,7 @@ function Signup() {
                                  borderColor="grey"
                                  borderWidth={"1px"}
                                  rounded="md"
+                                 icon="none"
                               >
                                  <option value="Nurse">Nurse</option>
                                  <option value="Dr">Doctor</option>

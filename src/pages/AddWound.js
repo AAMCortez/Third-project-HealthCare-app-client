@@ -1,7 +1,14 @@
+import {
+   Box,
+   Button,
+   FormControl,
+   FormLabel,
+   Input,
+   Stack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Button, Col, FormGroup, Input, Label, Row, Form } from "reactstrap";
 import { addWound, uploadImage } from "../api";
 
 function AddWound() {
@@ -37,44 +44,68 @@ function AddWound() {
    }
    return (
       <>
-         <Form onSubmit={handleSubmitForm}>
-            <Row>
-               <Col md={3}>
-                  <FormGroup>
-                     <Label htmlFor="image"></Label>
+         <Box as="form" onSubmit={handleSubmitForm}>
+            <Stack>
+               <Box md={3}>
+                  <FormControl>
+                     <FormLabel htmlFor="image"></FormLabel>
                      <Input
                         id="image"
                         type="file"
                         onChange={handleImageSelect}
                      />
-                  </FormGroup>
-               </Col>
-               <Col md={3}>
-                  <FormGroup>
-                     <Label htmlFor="description">Description</Label>
+                  </FormControl>
+               </Box>
+               <Box md={3}>
+                  <FormControl>
+                     <FormLabel htmlFor="description">Description</FormLabel>
                      <Input
+                        width="full"
+                        borderColor="grey"
+                        borderWidth={"1px"}
+                        rounded="md"
                         id="description"
                         type="textbox"
                         value={description}
                         onChange={handleDescriptionChange}
                      />
-                  </FormGroup>
-               </Col>
-               <Col md={2}>
-                  <FormGroup>
-                     <Label htmlFor="treatment">Treatment</Label>
+                  </FormControl>
+               </Box>
+               <Box md={2}>
+                  <FormControl>
+                     <FormLabel htmlFor="treatment">Treatment</FormLabel>
                      <Input
+                        width="full"
+                        borderColor="grey"
+                        borderWidth={"1px"}
+                        rounded="md"
                         id="treatment"
                         type="textbox"
                         value={treatment}
                         onChange={handleTreatment}
                      />
-                  </FormGroup>
-               </Col>
-            </Row>
+                  </FormControl>
+               </Box>
+            </Stack>
 
-            <Button>Add Wound</Button>
-         </Form>
+            <Button
+               w="fit-content"
+               rounded={"md"}
+               bg={"blue.400"}
+               color={"white"}
+               boxShadow={
+                  "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+               }
+               _hover={{
+                  bg: "blue.500",
+               }}
+               _focus={{
+                  bg: "blue.500",
+               }}
+            >
+               Add Wound
+            </Button>
+         </Box>
       </>
    );
 }

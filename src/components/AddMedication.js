@@ -1,6 +1,6 @@
+import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Col, FormGroup, Input, Label, Row, Form } from "reactstrap";
 import { updatePatient } from "../api";
 
 function AddMedication() {
@@ -19,22 +19,39 @@ function AddMedication() {
    }
    return (
       <>
-         <Form onSubmit={handleSubmitForm}>
-            <Row>
-               <Col md={6}>
-                  <FormGroup>
-                     <Label htmlFor="medication">Medication</Label>
-                     <Input
-                        id="medication"
-                        type="textbox"
-                        value={medication}
-                        onChange={handleMedicationChange}
-                     />
-                  </FormGroup>
-               </Col>
-            </Row>
-            <Button>Update Medication</Button>
-         </Form>
+         <Box as="form" onSubmit={handleSubmitForm} w="500px">
+            <FormControl>
+               <FormLabel htmlFor="medication">Medication</FormLabel>
+               <Input
+                  width="full"
+                  borderColor="grey"
+                  borderWidth={"1px"}
+                  rounded="md"
+                  id="medication"
+                  type="textbox"
+                  value={medication}
+                  onChange={handleMedicationChange}
+               />
+            </FormControl>
+
+            <Button
+               w="fit-content"
+               rounded={"md"}
+               bg={"blue.400"}
+               color={"white"}
+               boxShadow={
+                  "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+               }
+               _hover={{
+                  bg: "blue.500",
+               }}
+               _focus={{
+                  bg: "blue.500",
+               }}
+            >
+               Update Plan
+            </Button>
+         </Box>
       </>
    );
 }

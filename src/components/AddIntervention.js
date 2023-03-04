@@ -80,6 +80,7 @@ function AddIntervention() {
                _focus={{
                   bg: "blue.500",
                }}
+               type="submit"
             >
                Update Plan
             </Button>

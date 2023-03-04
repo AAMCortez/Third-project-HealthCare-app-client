@@ -129,6 +129,8 @@ function Patient() {
                            _focus={{
                               bg: "blue.500",
                            }}
+                           padding="4px 6px 4px 6px"
+
                         >
                            Add interventions to the Plan
                         </Button>
@@ -136,6 +138,7 @@ function Patient() {
                      {type.isDr && (
                         <Button
                            onClick={() => navigate(`/meds/${patientId}`)}
+                           padding="4px 6px 4px 6px"
                            w="fit-content"
                            rounded={"md"}
                            bg={"blue.400"}
@@ -182,12 +185,15 @@ function Patient() {
                                           <Text fontWeight={600}>
                                              Treatment applied in
                                           </Text>
-                                          {wound.treatment}
+                                          {new Date(
+                                             wound.createdAt
+                                          ).toLocaleDateString()}
                                        </Text>
                                        {loggedUser ? (
                                           <Link
                                              as={ReachLink}
                                              to={`/wound/${patientId}`}
+                                             
                                           >
                                              <Button
                                                 flex={1}
@@ -215,7 +221,30 @@ function Patient() {
                               })}
                            </Box>
                         ) : (
-                           <Text>Patient has skin integrity intact</Text>
+                           <>
+                              <Text>Patient has skin integrity intact</Text>
+                              <Link as={ReachLink} to={`/wound/${patientId}`}>
+                                 <Button
+                                    flex={1}
+                                    fontSize={"sm"}
+                                    size={"md"}
+                                    rounded={"md"}
+                                    bg={"blue.400"}
+                                    color={"white"}
+                                    boxShadow={
+                                       "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                                    }
+                                    _hover={{
+                                       bg: "blue.500",
+                                    }}
+                                    _focus={{
+                                       bg: "blue.500",
+                                    }}
+                                 >
+                                    Add a wound
+                                 </Button>
+                              </Link>
+                           </>
                         )}
                      </>
                   </Stack>

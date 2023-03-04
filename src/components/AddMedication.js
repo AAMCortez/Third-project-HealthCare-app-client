@@ -1,5 +1,6 @@
 import { Box, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { updatePatient } from "../api";
 
@@ -7,7 +8,25 @@ function AddMedication() {
    const [medication, setMedication] = useState("");
    const { patientId } = useParams();
    const navigate = useNavigate();
-
+   useEffect(() => {
+      const getDrugs = async () => {
+         await axios
+            .get("https://api.fda.gov/drug/label.json", {
+               params: {
+                  api_key: process.env.FDA_API_KEY,
+                  search: "openfda.generic_name:\"aspirin\" AND openfda.route:\"oral\"",
+                  limit: 2
+               },
+            })
+            .then((response) => {
+               console.log("response data here ", response.data.results);
+            })
+            .catch((error) => {
+               console.error(error);
+            });
+      };
+      getDrugs();
+   }, []);
    function handleMedicationChange(event) {
       setMedication(event.target.value);
    }

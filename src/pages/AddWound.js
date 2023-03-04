@@ -105,6 +105,7 @@ function AddWound() {
                _focus={{
                   bg: "blue.500",
                }}
+               type="submit"
             >
                Add Wound
             </Button>

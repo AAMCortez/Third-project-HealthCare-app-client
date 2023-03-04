@@ -10,6 +10,9 @@ export const getPatient = (bed) => {
 export const updatePatient = (bed, data) => {
    return axios.put(`${BASE_URL}/update/${bed}`, data); // pass data to the route
  };
+export const deleteIntervention = (bed, data) => {
+   return axios.put(`${BASE_URL}/intervention/${bed}`, data); 
+ };
 export const dischargePatient = (bed) => {
    return axios.delete(`${BASE_URL}/patient/${bed}`);
 };

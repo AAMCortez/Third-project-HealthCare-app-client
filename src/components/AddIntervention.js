@@ -1,8 +1,10 @@
+import { DeleteIcon } from "@chakra-ui/icons";
 import {
    Box,
    Button,
    FormControl,
    FormLabel,
+   IconButton,
    Input,
    List,
    ListItem,
@@ -11,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPatient, updatePatient } from "../api";
+import { deleteIntervention, getPatient, updatePatient } from "../api";
 
 function AddIntervention() {
    const [patientPlan, setPatientPlan] = useState(null);
@@ -34,9 +36,13 @@ function AddIntervention() {
 
    async function handleSubmitForm(event) {
       event.preventDefault();
-      await updatePatient(patientId, { healthcarePlan }); // pass patientId and healthcarePlan to updatePatient
-      setHealthcarePlanList([...healthcarePlanList, healthcarePlan]); // add new healthcare plan to the list
-      setHealthcarePlan(""); // clear the input field
+      await updatePatient(patientId, { healthcarePlan });
+      setHealthcarePlanList([...healthcarePlanList, healthcarePlan]);
+      setHealthcarePlan("");
+   }
+   async function handleDeleteIntervention(healthcarePlan) {
+      deleteIntervention(patientId, { healthcarePlan });
+      setHealthcarePlanList(healthcarePlanList.filter(item => item !== healthcarePlan))
    }
    return (
       <VStack w="500px">
@@ -82,7 +88,10 @@ function AddIntervention() {
                   <Text fontWeight="bold">Healthcare Plan:</Text>
                   <List mt={2} spacing={2}>
                      {healthcarePlanList.map((plan, index) => (
-                        <ListItem key={index}>{plan}</ListItem>
+                        <ListItem key={index}>
+                           {plan} {" "}
+                           <IconButton onClick={() => handleDeleteIntervention(plan)} icon={<DeleteIcon color="red" mb={1}/>}/>
+                        </ListItem>
                      ))}
                   </List>
                </Box>

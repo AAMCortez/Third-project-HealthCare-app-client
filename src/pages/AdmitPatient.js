@@ -80,12 +80,13 @@ function AdmitPatient() {
          alergiesSpecification,
          episode,
       });
+      alert(`Patient admited to bed number ${bed}`)
       navigate("/");
    }
 
    return (
-      <Box as="form"  onSubmit={handleSubmitForm}>
-         <Flex direction="row" alignItems="center" mr={1}>
+      <Box as="form" onSubmit={handleSubmitForm}>
+         <Flex direction="row" alignItems="center" m={1}>
             <FormControl mr={4}>
                <FormLabel htmlFor="firstName">First Name</FormLabel>
                <Input
@@ -141,7 +142,7 @@ function AdmitPatient() {
             </FormControl>
          </Flex>
 
-         <FormControl mt={2} mr={1}>
+         <FormControl mt={2} m={1}>
             <FormLabel htmlFor="personalMedicalHistory">
                Medical History
             </FormLabel>
@@ -155,7 +156,7 @@ function AdmitPatient() {
                rounded="md"
             />
          </FormControl>
-         <FormControl mr={1}>
+         <FormControl m={1}>
             <FormLabel htmlFor="regularMedication">
                Regular Medication
             </FormLabel>
@@ -171,7 +172,7 @@ function AdmitPatient() {
             />
          </FormControl>
 
-         <Flex direction="row" alignItems="center" mt={4} mr={1}>
+         <Flex direction="row" alignItems="center" mt={4} m={1}>
             <FormControl mr={4}>
                <Checkbox
                   id="alergies"
@@ -204,7 +205,7 @@ function AdmitPatient() {
             )}
          </Flex>
 
-         <FormControl mt={4} mr={1}>
+         <FormControl mt={4} m={1}>
             <FormLabel htmlFor="episode">Current Episode</FormLabel>
             <Textarea
                id="episode"
@@ -218,7 +219,24 @@ function AdmitPatient() {
             />
          </FormControl>
 
-         <Button type="submit" mt={4} mr={4}>
+         <Button
+            type="submit"
+            colorScheme="blue"
+            variant="ghost"
+            rounded={"full"}
+            bg="rgb(178,204,219)"
+            color={"blue.800"}
+            p={1}
+            boxShadow={
+               "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+            }
+            _hover={{
+               bg: "rgb(91,146,179)",
+            }}
+            _focus={{
+               bg: "rgb(91,146,179)",
+            }}
+         >
             Admit Patient
          </Button>
       </Box>

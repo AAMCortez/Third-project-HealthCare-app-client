@@ -6,6 +6,8 @@ import {
    Heading,
    Text,
    Stack,
+   VStack,
+   HStack,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -37,8 +39,7 @@ function Patient() {
 
    return patient ? (
       <>
-         <Center bg={`url(../../images/background.png) no-repeat center center fixed`}
-         backgroundSize="cover" h="91vh" >
+         <Center h="91vh">
             <Box
                maxW={"1000px"}
                w={"full"}
@@ -61,8 +62,8 @@ function Patient() {
                   {patient.firstName} {patient.lastName}
                </Heading>
                <Text fontWeight={600}>{patient.age} years old</Text>
-               <Stack direction={["column", "row"]} spacing="24px">
-                  <Stack>
+               <HStack spacing="20px">
+                  <Stack w="33%" mr="30px">
                      <Text as="cite">
                         <Text fontSize={"xl"} fontFamily={"body"}>
                            Admited with{" "}
@@ -91,30 +92,32 @@ function Patient() {
                         )}
                      </Stack>
                   </Stack>
-                  <Stack>
+                  <Stack w="33%">
                      {patient && patient.healthcarePlan.length > 0 ? (
-                        <Text color={"gray.700"}>
+                        <Text
+                           borderColor="grey"
+                           borderWidth={"1px"}
+                           rounded="md"
+                           p="10px"
+                           shadow="xl"
+                           color={"gray.700"}
+                           mb="40px"
+                        >
                            <Text fontWeight={600}>
                               Patient Health Care Plan
                            </Text>
                            {patient.healthcarePlan.map((intervention) => {
                               return (
-                                 <Text key={intervention}>{intervention}</Text>
+                                 <Text key={intervention}>
+                                    - {intervention}
+                                 </Text>
                               );
-                           })}
-                        </Text>
-                     ) : null}
-
-                     {patient && patient.medication.length > 0 ? (
-                        <Text color={"gray.700"}>
-                           <Text fontWeight={600}>Patient Medication</Text>
-                           {patient.medication.map((meds) => {
-                              return <Text key={meds}>{meds}</Text>;
                            })}
                         </Text>
                      ) : null}
                      {type.isNurse && (
                         <Button
+                           mt="10px"
                            onClick={() =>
                               navigate(`/interventions/${patientId}`)
                            }
@@ -132,13 +135,29 @@ function Patient() {
                               bg: "blue.500",
                            }}
                            padding="4px 6px 4px 6px"
-
                         >
                            Add interventions to the Plan
                         </Button>
                      )}
+
+                     {patient && patient.medication.length > 0 ? (
+                        <Text
+                           borderColor="grey"
+                           borderWidth={"1px"}
+                           rounded="md"
+                           p="10px"
+                           shadow="xl"
+                           color={"gray.700"}
+                        >
+                           <Text fontWeight={600}>Patient Medication</Text>
+                           {patient.medication.map((meds) => {
+                              return <Text key={meds}>- {meds}</Text>;
+                           })}
+                        </Text>
+                     ) : null}
                      {type.isDr && (
                         <Button
+                           mt="10px"
                            onClick={() => navigate(`/meds/${patientId}`)}
                            padding="4px 6px 4px 6px"
                            w="fit-content"
@@ -159,7 +178,14 @@ function Patient() {
                         </Button>
                      )}
                   </Stack>
-                  <Stack mt={4} direction={"row"} spacing={3} align={"center"}>
+                  <Stack
+                     w="33%"
+                     borderColor="grey"
+                     borderWidth={"1px"}
+                     rounded="md"
+                     p="10px"
+                     shadow="2xl"
+                  >
                      <>
                         {patient.wound.length > 0 ? (
                            <Box>
@@ -172,7 +198,7 @@ function Patient() {
                                        {wound.pictureUrl && (
                                           <img
                                              src={wound.pictureUrl}
-                                             width="100"
+                                             width="50px"
                                              alt="wound"
                                           />
                                        )}
@@ -191,36 +217,36 @@ function Patient() {
                                              wound.createdAt
                                           ).toLocaleDateString()}
                                        </Text>
-                                       {loggedUser ? (
-                                          <Link
-                                             as={ReachLink}
-                                             to={`/wound/${patientId}`}
-                                             
-                                          >
-                                             <Button
-                                                flex={1}
-                                                fontSize={"sm"}
-                                                size={"md"}
-                                                rounded={"md"}
-                                                bg={"blue.400"}
-                                                color={"white"}
-                                                boxShadow={
-                                                   "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                                                }
-                                                _hover={{
-                                                   bg: "blue.500",
-                                                }}
-                                                _focus={{
-                                                   bg: "blue.500",
-                                                }}
-                                             >
-                                                Add a wound
-                                             </Button>
-                                          </Link>
-                                       ) : null}
                                     </Box>
                                  );
                               })}
+                              {loggedUser ? (
+                                 <Link
+                                    as={ReachLink}
+                                    to={`/wound/${patientId}`}
+                                 >
+                                    <Button
+                                       flex={1}
+                                       fontSize={"sm"}
+                                       size={"md"}
+                                       rounded={"md"}
+                                       bg={"blue.400"}
+                                       color={"white"}
+                                       boxShadow={
+                                          "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                                       }
+                                       _hover={{
+                                          bg: "blue.500",
+                                       }}
+                                       _focus={{
+                                          bg: "blue.500",
+                                       }}
+                                       padding="4px 6px 4px 6px"
+                                    >
+                                       Manage wounds
+                                    </Button>
+                                 </Link>
+                              ) : null}
                            </Box>
                         ) : (
                            <>
@@ -242,15 +268,16 @@ function Patient() {
                                     _focus={{
                                        bg: "blue.500",
                                     }}
+                                    padding="4px 6px 4px 6px"
                                  >
-                                    Add a wound
+                                    Manage wounds
                                  </Button>
                               </Link>
                            </>
                         )}
                      </>
                   </Stack>
-               </Stack>
+               </HStack>
 
                {loggedUser ? (
                   <Button
@@ -259,6 +286,7 @@ function Patient() {
                      fontSize={"sm"}
                      size={"md"}
                      rounded={"md"}
+                     p="2px 3px 2px 3px"
                      bg={"red.500"}
                      w="fit-content"
                      color={"white"}

@@ -22,25 +22,25 @@ function AdmitModal() {
             height={"30px"}
             width={"100px"}
             rounded={"full"}
-            bg={"blue.400"}
-            color={"white"}
+            bg="rgb(178,204,219)"
+            color={"blue.800"}
             boxShadow={
                "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
             }
             _hover={{
-               bg: "blue.600",
+               bg: "rgb(91,146,179)",
             }}
             _focus={{
-               bg: "blue.500",
+               bg: "rgb(91,146,179)",
             }}
          >
-            Admit Patient{" "}
+            Admit Patient
          </Button>
          <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay
                bg="none"
                backdropFilter="auto"
-               backdropInvert="80%"
+               backdropInvert="30%"
                backdropBlur="2px"
             />
             <Flex alignItems="center" justifyContent="center">
@@ -49,7 +49,7 @@ function AdmitModal() {
                   borderColor="grey"
                   borderWidth={"5px"}
                   borderRadius="md"
-                  bg="red.100"
+                  bg="rgb(200,225,232)"
                   boxShadow="md"
                   h="fit-content"
                   w="fit-content"
@@ -67,26 +67,25 @@ function AdmitModal() {
                   >
                      <Button
                         colorScheme="blue"
-                        mr={3}
                         variant="ghost"
                         rounded={"full"}
-                        bg={"red.500"}
-                        color={"white"}
-                        p={3}
+                        bg="rgb(178,204,219)"
+                        color={"blue.800"}
+                        p={2}
                         boxShadow={
                            "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
                         }
                         _hover={{
-                           bg: "blue.500",
+                           bg: "rgb(91,146,179)",
                         }}
                         _focus={{
-                           bg: "blue.500",
+                           bg: "rgb(91,146,179)",
                         }}
                         onClick={onClose}
                      >
                         Close
                      </Button>
-                     <Button
+                     {/* <Button
                         variant="ghost"
                         rounded={"full"}
                         bg={"red.500"}
@@ -103,7 +102,7 @@ function AdmitModal() {
                         }}
                      >
                         Admit Patient
-                     </Button>
+                     </Button> */}
                   </ModalFooter>
                </ModalContent>
             </Flex>

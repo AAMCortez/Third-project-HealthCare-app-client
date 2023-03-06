@@ -36,7 +36,6 @@ function Login() {
       try {
          const response = await login({ fullName, password });
          localStorage.setItem("authToken", response.data);
-         //Setting the logged user in the context
          authenticateUser({ fullName });
          toast.success("User logged in");
          setFullName("");

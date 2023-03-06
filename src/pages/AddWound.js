@@ -3,21 +3,32 @@ import {
    Button,
    FormControl,
    FormLabel,
+   HStack,
    Input,
    Stack,
+   Text,
    Textarea,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { addWound, uploadImage } from "../api";
+import { addWound, getPatient, uploadImage } from "../api";
 
 function AddWound() {
    const [pictureUrl, setPictureUrl] = useState("");
    const [description, setDescription] = useState("");
    const [treatment, setTreatment] = useState("");
    const { patientId } = useParams();
+   const [patient, setPatient] = useState(null);
    const navigate = useNavigate();
+
+   useEffect(() => {
+      async function handlePatientDetail() {
+         const response = await getPatient(patientId);
+         setPatient(response.data);
+      }
+      handlePatientDetail();
+   }, [patientId]);
 
    function handleDescriptionChange(event) {
       setDescription(event.target.value);
@@ -45,7 +56,13 @@ function AddWound() {
    }
    return (
       <>
-         <Box as="form" w="400px" h="91vh" margin="auto" onSubmit={handleSubmitForm}>
+         <Box
+            as="form"
+            w="400px"
+            h="91vh"
+            margin="auto"
+            onSubmit={handleSubmitForm}
+         >
             <Stack>
                <Box md={3}>
                   <FormControl>
@@ -60,7 +77,7 @@ function AddWound() {
                <Box md={3}>
                   <FormControl>
                      <FormLabel htmlFor="description">Description</FormLabel>
-                     <Textarea 
+                     <Textarea
                         resize="none"
                         width="full"
                         borderColor="grey"
@@ -94,21 +111,61 @@ function AddWound() {
             <Button
                w="fit-content"
                rounded={"md"}
-               bg={"blue.400"}
-               color={"white"}
+               bg="rgb(178,204,219)"
+               color={"blue.800"}
                boxShadow={
                   "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
                }
                _hover={{
-                  bg: "blue.500",
+                  bg: "rgb(91,146,179)",
                }}
                _focus={{
-                  bg: "blue.500",
+                  bg: "rgb(91,146,179)",
                }}
+               padding="2px 3px 2px 3px"
                type="submit"
             >
                Add Wound
             </Button>
+            <Box>
+               {patient && patient.wound.length > 0 ? (
+                  <Box>
+                     <Text>
+                        {patient.firstName} {patient.lastName} Wounds:
+                     </Text>
+                     <HStack ml="-500px" spacing="50px">
+                        {patient.wound.map((wound) => {
+                           return (
+                              <HStack rounded="md" bgColor={`rgb(175, 204, 218)`} border="1px" boxShadow="lg" p="2px" key={wound._id}>
+                                 {wound.pictureUrl && (
+                                    <img
+                                       src={wound.pictureUrl}
+                                       width="200px"
+                                       alt="wound"
+                                    />
+                                 )}
+
+                                 <Text color={"gray.700"}>
+                                    <Text fontWeight={600}>Description</Text>
+                                    {wound.description}
+                                 </Text>
+                                 <Text color={"gray.700"}>
+                                    <Text fontWeight={600}>
+                                       Treatment applied in
+                                    </Text>
+                                    {new Date(
+                                       wound.createdAt
+                                    ).toLocaleDateString()}
+                                 </Text>
+                              </HStack>
+                           );
+                        })}
+                     </HStack>
+                  </Box>
+               ) : (
+                  <Text>No wounds to present</Text>
+               )}
+            </Box>
          </Box>
       </>
    );

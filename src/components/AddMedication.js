@@ -4,6 +4,8 @@ import {
    FormControl,
    FormLabel,
    Input,
+   List,
+   ListItem,
    Stack,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -18,27 +20,24 @@ function AddMedication() {
    const [results, setResults] = useState([]);
    const { patientId } = useParams();
    const navigate = useNavigate();
-   useEffect(() => {
-      const getDrugs = async () => {
-         await axios
-            .get("https://api.fda.gov/drug/label.json", {
-               params: {
-                  api_key: process.env.FDA_API_KEY,
-                  search: `openfda.generic_name:"${searchQuery}" AND openfda.route:"${searchRoute}"`,
-                  limit: 1,
-               },
-            })
-            .then((response) => {
-               console.log("response data here ", response.data.results);
-               setResults(response.data.results);
-            })
-            .catch((error) => {
-               console.error(error);
-            });
-      };
-
-      getDrugs();
-   }, [searchQuery, searchRoute]);
+   async function handleSearchButtonClick(event) {
+      event.preventDefault();
+      await axios
+         .get("https://api.fda.gov/drug/label.json", {
+            params: {
+               api_key: process.env.FDA_API_KEY,
+               search: `openfda.generic_name:"${searchQuery}" AND openfda.route:"${searchRoute}"`,
+               limit: 2,
+            },
+         })
+         .then((response) => {
+            console.log("response data here ", response.data.results);
+            setResults(response.data.results);
+         })
+         .catch((error) => {
+            console.error(error);
+         });
+   }
    function handleMedicationChange(event) {
       setMedication(event.target.value);
    }
@@ -56,7 +55,13 @@ function AddMedication() {
    }
    return (
       <>
-         <Box as="form" onSubmit={handleSubmitForm} w="500px" h="91vh" margin="auto">
+         <Box
+            as="form"
+            onSubmit={handleSubmitForm}
+            w="500px"
+            h="91vh"
+            margin="auto"
+         >
             <FormControl>
                <FormLabel htmlFor="medication">Medication</FormLabel>
                <Input
@@ -74,27 +79,27 @@ function AddMedication() {
             <Button
                w="fit-content"
                rounded={"md"}
-               bg={"blue.400"}
-               padding="2px 3px 2px 3px"
-               color={"white"}
+               bg="rgb(178,204,219)"
+               color={"blue.800"}
                boxShadow={
                   "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
                }
                _hover={{
-                  bg: "blue.500",
+                  bg: "rgb(91,146,179)",
                }}
                _focus={{
-                  bg: "blue.500",
+                  bg: "rgb(91,146,179)",
                }}
+               padding="2px 3px 2px 3px"
             >
                Update Medication
             </Button>
 
-            <Box>
+            <List>
                {results.map((medication, index) => (
-                  <li key={index}>{medication.openfda.generic_name}</li>
+                  <ListItem key={index}>{medication.openfda.generic_name}</ListItem>
                ))}
-            </Box>
+            </List>
             <Stack>
                <FormControl mt={4}>
                   <FormLabel htmlFor="search">Name</FormLabel>
@@ -122,6 +127,25 @@ function AddMedication() {
                      onChange={handleSearchRouteChange}
                   />
                </FormControl>
+               <Button
+                  onClick={handleSearchButtonClick}
+                  w="fit-content"
+                  rounded={"md"}
+                  bg="rgb(178,204,219)"
+                  color={"blue.800"}
+                  boxShadow={
+                     "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
+                  }
+                  _hover={{
+                     bg: "rgb(91,146,179)",
+                  }}
+                  _focus={{
+                     bg: "rgb(91,146,179)",
+                  }}
+                  padding="2px 3px 2px 3px"
+               >
+                  Search
+               </Button>
             </Stack>
          </Box>
       </>

@@ -45,7 +45,7 @@ function AddWound() {
    }
    return (
       <>
-         <Box as="form" w="400px" onSubmit={handleSubmitForm}>
+         <Box as="form" w="400px" h="91vh" margin="auto" onSubmit={handleSubmitForm}>
             <Stack>
                <Box md={3}>
                   <FormControl>

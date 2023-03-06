@@ -15,7 +15,8 @@ import { ChakraBaseProvider } from "@chakra-ui/react";
 
 function App() {
    return (
-      <div className="App">
+      <div className="App" bg={`url(../../images/background.png) no-repeat center center fixed`}
+      backgroundSize="cover" h="91vh">
          <ChakraBaseProvider>
             <Navbar />
             <Routes>

@@ -37,7 +37,8 @@ function Patient() {
 
    return patient ? (
       <>
-         <Center>
+         <Center bg={`url(../../images/background.png) no-repeat center center fixed`}
+         backgroundSize="cover" h="91vh" >
             <Box
                maxW={"1000px"}
                w={"full"}
@@ -45,6 +46,7 @@ function Patient() {
                rounded={"md"}
                p={6}
                overflow={"hidden"}
+               bg={`rgb(175, 204, 218)`}
             >
                <Text
                   color={"red.500"}
@@ -278,10 +280,12 @@ function Patient() {
       </>
    ) : (
       <Stack
-         height={"500px"}
+         height={"91vh"}
          display={"flex"}
          justifyContent={"center"}
          alignItems={"center"}
+         bg={`url(../../images/background.png) no-repeat center center fixed`}
+         backgroundSize="cover"
       >
          {loggedUser ? (
             <Box width={"180px"}>

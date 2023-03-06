@@ -44,7 +44,6 @@ import {
    MenuItem,
    MenuDivider,
    useDisclosure,
-   useColorModeValue,
    Stack,
    Text,
 } from "@chakra-ui/react";
@@ -72,7 +71,7 @@ export default function Navbar() {
 
    return (
       <>
-         <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+         <Box bg={`rgb(175, 204, 218)`} px={4}>
             <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
                <IconButton
                   size={"md"}
@@ -82,7 +81,7 @@ export default function Navbar() {
                   onClick={isOpen ? onClose : onOpen}
                />
                <HStack spacing={8} alignItems={"center"}>
-                  <Box>
+                  <Box fontSize="xl">
                      {loggedUser ? (
                         <Text>Welcome {loggedUser.fullName}</Text>
                      ) : (
@@ -93,6 +92,7 @@ export default function Navbar() {
                      as={"nav"}
                      spacing={4}
                      display={{ base: "none", md: "flex" }}
+                     fontSize="xl"
                   >
                      <NavLink to="/">Home</NavLink>
                   </HStack>

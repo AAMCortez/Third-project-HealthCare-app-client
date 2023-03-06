@@ -15,7 +15,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAllPatients } from "../api";
 
-
 function Home() {
    const [patients, setPatients] = useState(null);
 
@@ -39,9 +38,9 @@ function Home() {
          alignContent="center"
          alignItems="flex-end"
          gridTemplateRows="repeat(auto-fill, minmax(200px, 1fr))"
-         bg="blue.200"
+         bg={`url(../../images/background.png) no-repeat center center fixed`}
+         backgroundSize="cover"
          h="91vh"
-         
       >
          {beds.map((bedNumber) => {
             const patient = patients?.find((p) => p.bed === bedNumber); // find patient with matching bed number
@@ -57,7 +56,7 @@ function Home() {
                <Popover key={bedNumber} trigger="hover">
                   <PopoverTrigger>
                      <Card size="md">
-                        <Link  to={`/patient/${bedNumber}`}>
+                        <Link to={`/patient/${bedNumber}`}>
                            <img
                               style={{ width: "300px" }}
                               src={imgSrc}
@@ -67,19 +66,33 @@ function Home() {
                      </Card>
                   </PopoverTrigger>
                   <Portal>
-                     <PopoverContent>
+                     <PopoverContent rounded="md" bgColor={`rgb(175, 204, 218)`} border="1px" boxShadow="lg" p="2px">
                         <PopoverArrow />
-                        <PopoverHeader fontWeight="semibold">
+                        <PopoverHeader fontWeight="semibold" color="red">
                            Bed {bedNumber}
                         </PopoverHeader>
                         <PopoverBody>
                            {patient ? (
                               <>
-                                 <Text>
-                                    Patient {patientName} {patientLastName}{" "}
-                                    {patientAge} Years old
+                                 <Text 
+                                 fontWeight="semibold"
+                                    style={{
+                                       wordWrap: "break-word",
+                                       width: "300px",
+                                       
+                                    }}
+                                 >
+                                    Patient {patientName} {patientLastName}{", "}
+                                    {patientAge} years old
                                  </Text>
-                                 <Text>Admited with {patientEpisode}</Text>
+                                 <Text
+                                    style={{
+                                       wordWrap: "break-word",
+                                       width: "300px",
+                                    }}
+                                 >
+                                    Admited with {patientEpisode}
+                                 </Text>
                               </>
                            ) : (
                               patientName

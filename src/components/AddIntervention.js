@@ -45,7 +45,7 @@ function AddIntervention() {
       setHealthcarePlanList(healthcarePlanList.filter(item => item !== healthcarePlan))
    }
    return (
-      <VStack w="500px">
+      <VStack w="500px" h="91vh" margin="auto">
          <Box as="form" onSubmit={handleSubmitForm} w="full">
             <FormControl>
                <FormLabel htmlFor="healthcarePlan">Interventions</FormLabel>
@@ -80,6 +80,7 @@ function AddIntervention() {
                _focus={{
                   bg: "blue.500",
                }}
+               padding="2px 3px 2px 3px"
                type="submit"
             >
                Update Plan

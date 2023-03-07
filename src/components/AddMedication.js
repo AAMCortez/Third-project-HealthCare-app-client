@@ -4,12 +4,11 @@ import {
    FormControl,
    FormLabel,
    Input,
-   List,
-   ListItem,
+   Select,
    Stack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { updatePatient } from "../api";
 
@@ -64,16 +63,33 @@ function AddMedication() {
          >
             <FormControl>
                <FormLabel htmlFor="medication">Medication</FormLabel>
-               <Input
+               <Select
                   width="full"
                   borderColor="grey"
                   borderWidth={"1px"}
                   rounded="md"
                   id="medication"
-                  type="textbox"
+                  icon="none"
+                  placeholder="Select a Medication"
                   value={medication}
                   onChange={handleMedicationChange}
-               />
+               >
+                  
+                  {results ? (
+                     results.map((medication) => (
+                        <option key={medication.id}>
+                           {medication.openfda.generic_name[0]
+                              .charAt(0)
+                              .toUpperCase() +
+                              medication.openfda.generic_name[0]
+                                 .slice(1)
+                                 .toLowerCase()}
+                        </option>
+                     ))
+                  ) : (
+                     <p>there is no medication to present</p>
+                  )}
+               </Select>
             </FormControl>
 
             <Button
@@ -91,15 +107,11 @@ function AddMedication() {
                   bg: "rgb(91,146,179)",
                }}
                padding="2px 3px 2px 3px"
+               type="submit"
             >
                Update Medication
             </Button>
 
-            <List>
-               {results.map((medication, index) => (
-                  <ListItem key={index}>{medication.openfda.generic_name}</ListItem>
-               ))}
-            </List>
             <Stack>
                <FormControl mt={4}>
                   <FormLabel htmlFor="search">Name</FormLabel>
@@ -144,7 +156,7 @@ function AddMedication() {
                   }}
                   padding="2px 3px 2px 3px"
                >
-                  Search
+                  Search Medication
                </Button>
             </Stack>
          </Box>

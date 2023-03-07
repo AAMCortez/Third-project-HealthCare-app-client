@@ -1,36 +1,6 @@
 import { UserContext } from "../context/user.context";
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
-// function Navbar() {
-//    const { loggedUser, logout } = useContext(UserContext);
-//    return (
-//       <Nav className="navbar">
-//          <div>
-//             <NavItem>
-//                <NavLink className="navbar-button" to="/">Home</NavLink>
-//             </NavItem>
-//             {loggedUser ? (
-//                <div className="navbar-logged-user">
-//                   <p>Welcome {loggedUser.fullName}</p>
-//                   <button onClick={logout}>Logout</button>
-//                </div>
-//             ) : (
-//                <div>
-//                   <NavItem>
-//                      <NavLink className="navbar-button" to="/login">Login</NavLink>
-//                   </NavItem>
-//                   <NavItem>
-//                      <NavLink className="navbar-button" to="/signup">Signup</NavLink>
-//                   </NavItem>
-//                </div>
-//             )}
-//          </div>
-//       </Nav>
-//    );
-// }
-
-// export default Navbar;
-
+import { NavLink, useNavigate } from "react-router-dom";
 import {
    Box,
    Flex,
@@ -48,14 +18,17 @@ import {
    Text,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-
-const Links = ["Home", "Patients"];
+const Links = ["Home"];
 
 export default function Navbar() {
    const { isOpen, onOpen, onClose } = useDisclosure();
    const { loggedUser, logout, getUserType } = useContext(UserContext);
    const type = getUserType(loggedUser);
+   const navigate = useNavigate();
 
+   function handleGoBack() {
+     navigate(-1);
+   }
    let imgSrc = "";
 
    function srcImgLogo() {
@@ -95,6 +68,7 @@ export default function Navbar() {
                      fontSize="xl"
                   >
                      <NavLink to="/">Home</NavLink>
+                     <button onClick={handleGoBack}><img src="../images/undoIcon.png" alt="Go back" width="30px"/></button>
                   </HStack>
                </HStack>
                <Flex alignItems={"center"}>

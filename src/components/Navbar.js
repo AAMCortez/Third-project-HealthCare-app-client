@@ -68,7 +68,7 @@ export default function Navbar() {
                      fontSize="xl"
                   >
                      <NavLink to="/">Home</NavLink>
-                     <button onClick={handleGoBack}><img src="../images/undoIcon.png" alt="Go back" width="30px"/></button>
+                     <button onClick={handleGoBack}><img src="../images/undoIcon.png" alt="Go back" width="25px"/></button>
                   </HStack>
                </HStack>
                <Flex alignItems={"center"}>

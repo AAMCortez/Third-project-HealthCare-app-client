@@ -6,7 +6,6 @@ import {
    Heading,
    Text,
    Stack,
-   VStack,
    HStack,
 } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
@@ -65,30 +64,39 @@ function Patient() {
                <HStack spacing="20px">
                   <Stack w="33%" mr="30px">
                      <Text as="cite">
-                        <Text fontSize={"xl"} fontFamily={"body"}>
+                        <Text
+                           fontSize={"xl"}
+                           fontWeight="semibold"
+                           fontFamily={"body"}
+                        >
                            Admited with{" "}
                         </Text>
                         {patient.episode}
                      </Text>
 
                      <Text color={"gray.700"}>
-                        <Text fontWeight={600}>Medical background of</Text>{" "}
+                        <Text fontWeight={650}>Medical background of</Text>{" "}
                         {patient.personalMedicalHistory}
                      </Text>
                      <Text color={"gray.700"}>
-                        <Text fontWeight={600}>Regular medication</Text>{" "}
+                        <Text fontWeight={650}>Regular medication</Text>{" "}
                         {patient.regularMedication}
                      </Text>
                      <Stack direction={"column"} spacing={0} fontSize={"sm"}>
                         {patient.alergiesSpecification ? (
                            <>
                               <Text fontWeight={600}>
+                                 <img
+                                    src="../images/dangerIcon.png"
+                                    alt="Go back"
+                                    width="25px"
+                                 />
                                  Patient has allergies to:
                               </Text>
                               <Text>{patient.alergiesSpecification}</Text>
                            </>
                         ) : (
-                           <Text>No allergies known</Text>
+                           <Text>No known allergies</Text>
                         )}
                      </Stack>
                   </Stack>

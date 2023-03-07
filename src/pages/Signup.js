@@ -51,7 +51,7 @@ function Signup() {
          setFirstName("");
          setLastName("");
          setPassword("");
-         navigate("/");
+         navigate("/login");
       } catch (error) {
          toast.info(`Error`, error);
       }

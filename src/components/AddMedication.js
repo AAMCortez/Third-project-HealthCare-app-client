@@ -1,16 +1,21 @@
+import { DeleteIcon } from "@chakra-ui/icons";
 import {
    Box,
    Button,
    FormControl,
    FormLabel,
+   IconButton,
    Input,
+   List,
+   ListItem,
    Select,
    Stack,
+   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { updatePatient } from "../api";
+import { deleteMedication, getPatient, updatePatient } from "../api";
 
 function AddMedication() {
    const [medication, setMedication] = useState("");
@@ -18,10 +23,22 @@ function AddMedication() {
    const [searchRoute, setSearchRoute] = useState("");
    const [renderResults, setRenderResults] = useState(false);
    const [results, setResults] = useState([]);
+   const [medicationList, setMedicationList] = useState([]);
    const { patientId } = useParams();
    const navigate = useNavigate();
+
+   useEffect(() => {
+      async function handlePatientDetail() {
+         const response = await getPatient(patientId);
+         setMedication(response.data);
+         setMedicationList(response.data.medication || []);
+      }
+      handlePatientDetail();
+   }, [patientId]);
+
    async function handleSearchButtonClick(event) {
       event.preventDefault();
+      setRenderResults(true);
       await axios
          .get("https://api.fda.gov/drug/label.json", {
             params: {
@@ -39,6 +56,7 @@ function AddMedication() {
             console.error(error);
          });
    }
+
    function handleMedicationChange(event) {
       setMedication(event.target.value);
    }
@@ -48,7 +66,10 @@ function AddMedication() {
    function handleSearchRouteChange(event) {
       setSearchRoute(event.target.value);
    }
-
+   async function handleDeleteMedication(medication) {
+      deleteMedication(patientId, { medication });
+      setMedicationList(medicationList.filter((item) => item !== medication));
+   }
    async function handleSubmitForm(event) {
       event.preventDefault();
       await updatePatient(patientId, { medication });
@@ -110,7 +131,7 @@ function AddMedication() {
                   Search Medication
                </Button>
             </Stack>
-            {renderResults ? (
+            {renderResults && results.length > 0 && (
                <Stack>
                   <FormControl mt={5} mb={2}>
                      <FormLabel htmlFor="medication">Medication</FormLabel>
@@ -125,23 +146,18 @@ function AddMedication() {
                         value={medication}
                         onChange={handleMedicationChange}
                      >
-                        {results ? (
-                           results.map((medication) => (
-                              <option key={medication.id}>
-                                 {medication.openfda.generic_name[0]
-                                    .charAt(0)
-                                    .toUpperCase() +
-                                    medication.openfda.generic_name[0]
-                                       .slice(1)
-                                       .toLowerCase()}
-                              </option>
-                           ))
-                        ) : (
-                           <p>there is no medication to present</p>
-                        )}
+                        {results.map((medication) => (
+                           <option key={medication.id}>
+                              {medication.openfda.generic_name[0]
+                                 .charAt(0)
+                                 .toUpperCase() +
+                                 medication.openfda.generic_name[0]
+                                    .slice(1)
+                                    .toLowerCase()}
+                           </option>
+                        ))}
                      </Select>
                   </FormControl>
-
                   <Button
                      w="fit-content"
                      rounded={"md"}
@@ -162,8 +178,25 @@ function AddMedication() {
                      Update Medication
                   </Button>
                </Stack>
-            ) : null}
-         </Box>
+            )}
+            {results.length === 0 && <p>there is no medication to present</p>}
+         {medicationList.length > 0 && (
+            <Box mt="4">
+               <Text fontWeight="bold">Medication</Text>
+               <List mt={2} spacing={2}>
+                  {medicationList.map((medication, index) => (
+                     <ListItem key={index}>
+                        {medication}{" "}
+                        <IconButton
+                           onClick={() => handleDeleteMedication(medication)}
+                           icon={<DeleteIcon color="red" mb={1} />}
+                        />
+                     </ListItem>
+                  ))}
+               </List>
+            </Box>
+         )}</Box>
+         
       </>
    );
 }

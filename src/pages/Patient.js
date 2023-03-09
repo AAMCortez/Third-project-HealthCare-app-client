@@ -156,6 +156,8 @@ function Patient() {
                            p="10px"
                            shadow="xl"
                            color={"gray.700"}
+                           maxH="30vh"
+                           overflowY={patient.medication.length > 0 && patient.medication.length * 10 > 30 ? "scroll" : "hidden"}
                         >
                            <Text fontWeight={600}>Patient Medication</Text>
                            {patient.medication.map((meds) => {
@@ -193,6 +195,9 @@ function Patient() {
                      rounded="md"
                      p="10px"
                      shadow="2xl"
+                     maxH="60vh"
+                     overflowY={patient.wound.length > 0 && patient.wound.length * 10 > 30 ? "scroll" : "hidden"}
+                     
                   >
                      <>
                         {patient.wound.length > 0 ? (

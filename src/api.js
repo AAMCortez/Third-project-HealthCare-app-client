@@ -13,6 +13,9 @@ export const updatePatient = (bed, data) => {
 export const deleteIntervention = (bed, data) => {
    return axios.put(`${BASE_URL}/intervention/${bed}`, data); 
  };
+export const deleteMedication = (bed, data) => {
+   return axios.put(`${BASE_URL}/meds/${bed}`, data); 
+ };
 export const dischargePatient = (bed) => {
    return axios.delete(`${BASE_URL}/patient/${bed}`);
 };

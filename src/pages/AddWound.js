@@ -1,17 +1,13 @@
 import {
    Box,
    Button,
-   Center,
    FormControl,
    FormLabel,
-   Heading,
    HStack,
    Input,
    Stack,
    Text,
    Textarea,
-   useColorModeValue,
-   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -59,7 +55,7 @@ function AddWound() {
       navigate(`/patient/${patientId}`);
    }
    return (
-      <Box h="91vh">
+      <Box h="91vh" background-image={`url("../../images/background.png")`}>
          <Box as="form" w="400px" margin="auto" onSubmit={handleSubmitForm}>
             <Stack>
                <Box md={3}>
@@ -158,7 +154,9 @@ function AddWound() {
                               </Box>
                               <Box>
                                  <Text color={"gray.700"}>
-                                    <Text fontWeight={600}>Description</Text>
+                                    <Text w="100px" fontWeight={600}>
+                                       Description
+                                    </Text>
                                     {wound.description}
                                  </Text>
                                  <Text color={"gray.700"}>
@@ -166,7 +164,7 @@ function AddWound() {
                                     {wound.treatment}
                                  </Text>
                                  <Stack
-                                 mt="10px"
+                                    mt="10px"
                                     direction={"column"}
                                     spacing={0}
                                     fontSize={"smaller"}

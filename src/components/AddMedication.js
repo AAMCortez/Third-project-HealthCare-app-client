@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { deleteMedication, getPatient, updatePatient } from "../api";
 
 function AddMedication() {

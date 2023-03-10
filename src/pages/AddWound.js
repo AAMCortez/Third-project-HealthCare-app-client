@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import { addWound, getPatient, uploadImage } from "../api";
 
 function AddWound() {
@@ -51,7 +50,7 @@ function AddWound() {
          treatment,
          patientId,
       });
-      toast.success("Wound added");
+     
       navigate(`/patient/${patientId}`);
    }
    return (

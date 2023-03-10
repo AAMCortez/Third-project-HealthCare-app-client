@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { admitPatient } from "../api";
 
 function AdmitPatient() {
@@ -80,7 +81,7 @@ function AdmitPatient() {
          alergiesSpecification,
          episode,
       });
-      alert(`Patient admited to bed number ${bed}`)
+      toast.success(`Patient admited to bed number ${bed}`)
       navigate("/");
    }
 

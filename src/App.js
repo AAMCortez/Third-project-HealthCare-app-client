@@ -21,6 +21,7 @@ function App() {
          backgroundSize="cover"
          h="91vh"
       >
+         
          <ChakraBaseProvider>
             <Navbar />
             <Routes>
@@ -63,6 +64,7 @@ function App() {
                />
             </Routes>
          </ChakraBaseProvider>
+        
       </div>
    );
 }

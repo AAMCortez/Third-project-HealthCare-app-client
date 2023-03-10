@@ -25,7 +25,7 @@ function AddMedication() {
    const [results, setResults] = useState([]);
    const [medicationList, setMedicationList] = useState([]);
    const { patientId } = useParams();
-   const navigate = useNavigate();
+  
 
    useEffect(() => {
       async function handlePatientDetail() {
@@ -73,7 +73,8 @@ function AddMedication() {
    async function handleSubmitForm(event) {
       event.preventDefault();
       await updatePatient(patientId, { medication });
-      navigate(`/patient/${patientId}`);
+      setMedicationList([...medicationList, medication]);
+      setMedication("");
    }
    return (
       <>

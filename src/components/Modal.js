@@ -85,24 +85,6 @@ function AdmitModal() {
                      >
                         Close
                      </Button>
-                     {/* <Button
-                        variant="ghost"
-                        rounded={"full"}
-                        bg={"red.500"}
-                        color={"white"}
-                        p={3}
-                        boxShadow={
-                           "1px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                        }
-                        _hover={{
-                           bg: "blue.500",
-                        }}
-                        _focus={{
-                           bg: "blue.500",
-                        }}
-                     >
-                        Admit Patient
-                     </Button> */}
                   </ModalFooter>
                </ModalContent>
             </Flex>

@@ -43,7 +43,7 @@ function Home() {
          h="91vh"
       >
          {beds.map((bedNumber) => {
-            const patient = patients?.find((p) => p.bed === bedNumber); // find patient with matching bed number
+            const patient = patients?.find((p) => p.bed === bedNumber); 
             const imgSrc = patient
                ? "../images/bedblack.png"
                : "../images/bedwhite.png"; // determine image source

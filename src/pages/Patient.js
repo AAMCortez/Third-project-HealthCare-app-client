@@ -34,7 +34,7 @@ function Patient() {
 
       navigate("/");
    }
-   const type = getUserType(loggedUser); // PROTECT OTHER ROUTES
+   const type = getUserType(loggedUser);
 
    return patient ? (
       <>
